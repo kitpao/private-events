@@ -11,5 +11,5 @@ RSpec.describe User, type: :model do
   invited.invitations
   host.event
 =end
-.
+
 end
