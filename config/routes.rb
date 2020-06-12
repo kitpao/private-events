@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  get '/health' to: 'health#health'
+  get '/health', to: 'health#health'
 end
