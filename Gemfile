@@ -50,5 +50,10 @@ group :production do
   gem 'pg'
 end
 
+group :test do
+  gem 'shoulda', '~>3.6.0'
+  gem 'shoulda-matchers', '~>3.1.3'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

@@ -178,6 +178,12 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    shoulda (3.6.0)
+      shoulda-context (~> 1.0, >= 1.0.1)
+      shoulda-matchers (~> 3.0)
+    shoulda-context (1.2.2)
+    shoulda-matchers (3.1.3)
+      activesupport (>= 4.0.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -233,6 +239,8 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.1)
   rspec-rails
   sass-rails (>= 6)
+  shoulda (~> 3.6.0)
+  shoulda-matchers (~> 3.1.3)
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)
