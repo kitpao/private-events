@@ -1,5 +1,5 @@
 class Invitation < ApplicationRecord
-  belong_to :host, class_name: "User"
-  belong_to :invited, class_name: "User"
-  belong_to :event
+  belongs_to :host, class_name: "User"
+  belongs_to :invited, class_name: "User"
+  belongs_to :event
 end
