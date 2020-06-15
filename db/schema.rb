@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_205433) do
+ActiveRecord::Schema.define(version: 2020_06_12_222252) do
 
   create_table "events", force: :cascade do |t|
     t.integer "host_id"
+    t.text "description"
+    t.string "location"
+    t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "description"
     t.index ["host_id"], name: "index_events_on_host_id"
   end
 
@@ -24,9 +26,7 @@ ActiveRecord::Schema.define(version: 2020_06_15_205433) do
     t.integer "host_id"
     t.integer "invited_id"
     t.integer "event_id"
-    t.date "date"
-    t.string "location"
-    t.string "accepted", default: "pending"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_invitations_on_event_id"

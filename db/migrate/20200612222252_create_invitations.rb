@@ -4,9 +4,7 @@ class CreateInvitations < ActiveRecord::Migration[6.0]
       t.references :host
       t.references :invited
       t.references :event
-      t.date     :date
-      t.string   :location
-      t.string  :accepted, default: "pending"
+      t.string  :status, default: "pending"
       t.timestamps
     end
   end
