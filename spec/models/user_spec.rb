@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe Host do
+  describe "Host" do
     it "has invitations" do
       should have_many(:invitations).class_name('Invitation')
     end
@@ -11,5 +11,4 @@ RSpec.describe User, type: :model do
   invited.invitations
   host.event
 =end
-
 end
