@@ -13,16 +13,28 @@
 ActiveRecord::Schema.define(version: 2020_06_12_222252) do
 
   create_table "events", force: :cascade do |t|
+    t.integer "host_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["host_id"], name: "index_events_on_host_id"
   end
 
   create_table "invitations", force: :cascade do |t|
+    t.integer "host_id"
+    t.integer "invited_id"
+    t.integer "event_id"
+    t.date "date"
+    t.string "location"
+    t.string "accepted", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_invitations_on_event_id"
+    t.index ["host_id"], name: "index_invitations_on_host_id"
+    t.index ["invited_id"], name: "index_invitations_on_invited_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
