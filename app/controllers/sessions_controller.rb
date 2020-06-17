@@ -4,8 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_name(params[:user][:name])
-    #remember to make unique names
+    user = User.find_by_name(params[:session][:name])
     if user && !user.nil?
       session[:user_id] = user.id
       redirect_to user_path(user)
