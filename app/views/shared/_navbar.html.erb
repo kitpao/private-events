@@ -8,7 +8,7 @@
       <li><%= link_to 'Log in', sign_in_path  %></li>
       <li><%= link_to 'Sign up', sign_up_path %></li>
      <% else %>
-      <li><%= link_to 'Log out', method: :delete, session_path %></li>
+      <li><%= link_to 'Log out', session_path(session), method: :delete %></li>
      <% end %>
     </ul>
   </nav>
