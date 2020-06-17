@@ -12,10 +12,10 @@ RSpec.describe "Show user endpoint", type: :request do
       puts headers
     end
   end
-  describe "POST /signup" do
+  describe "POST /users" do
     subject { post '/users', :params => { :user => {:name => 'foo' }}}
-         
-    it "redirects to user_path(@user)" do
+
+    it "redirects to user_path(user)" do
       expect(subject).to redirect_to("/users/1")
     end
   end
