@@ -1,0 +1,10 @@
+<h1>Sign up form!</h1>
+<br>
+<%= form_with model: @user do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name, autofocus: true %>
+  <br>
+  <br>
+  <%= f.submit 'Sign up!' %>
+
+<% end %>
