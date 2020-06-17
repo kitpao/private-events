@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :sessions, only: %i[create destroy]
   get '/sign_in', to: 'sessions#new'
   get '/sign_up', to: 'users#new'
+
+  root 'events#index'
 end
