@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-  
+
   def new
   end
-  
+
   def create
     user = User.find_by_name(params[:user][:name])
     #remember to make unique names
@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_to user_path(user)
       #link_to dashboard
     else
-      redirect_to signup_path
+      redirect_to sign_up_path
     end
   end
 
