@@ -1,12 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe "Show user endpoint", type: :request do
-  let!(:user) { create(:user) }
-  describe 'show page' do
-    it 'shows the right content' do
-      visit user_path(user)
-      p user
-      expect(page).to have_content(user.name)
+  describe "GET /signup" do
+    before { get '/sign_up' }
+
+    it "should return 200" do
+      expect(response).to have_http_status(200)
+    end
+    it "should return rigth title" do
+      expect(response.body).to include("Sign up form!")
+      puts headers
+    end
+  end
+  describe "POST /signup" do
+    subject { post '/users', :params => { :user => {:name => 'foo' }}}
+         
+    it "redirects to user_path(@user)" do
+      expect(subject).to redirect_to("/users/1")
     end
   end
 end
