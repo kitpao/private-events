@@ -19,7 +19,7 @@
     <% if flash[:danger] %>
      <p class="danger"><%= flash[:danger] %></p>
     <% end %>
-
+    <%= render 'shared/navbar' %>
     <%= yield %>
   </body>
 </html>
