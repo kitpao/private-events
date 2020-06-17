@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       redirect_to user_path(user)
       #link_to dashboard
     else
+      flash[:notice] = "Account doesn't exist, please sign up"
       redirect_to sign_up_path
     end
   end
