@@ -5,9 +5,16 @@ header {
   .nav {
     min-height: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-  
+
+    ul {
+      display: flex;
+      justify-content: space-around;
+      width: 10%;
+
+    }
+
     a {
       color: white;
       background-color: goldenrod;

@@ -1,7 +1,10 @@
 <header>
   <nav class='nav'>
+    <h3> Welcome to our pag </h3>
     <% if sign_in? %>
-      <h3><%= current_user.name %></h3>
+      <h3>e  <%= current_user.name %>!</h3>
+    <% else %>
+      <h3>e!</h3>
     <% end %>
     <ul>
      <% if !sign_in? %>
