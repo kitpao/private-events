@@ -6,8 +6,5 @@ class Event < ApplicationRecord
   def self.upcoming_events
     self.where('date >= ?', Time.now)
   end
-  def self.previous_events
-    self.where('date < ?', Time.now)
-  end
-  
+  scope :previous_events, -> { where('date < ?', Time.now) }
 end
