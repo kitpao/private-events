@@ -2,17 +2,17 @@
 <div class="container">
 <h1 class="title">Events</h1>
 <!--More popular events based on invitations-->
-<ul> 
+<ul>
   <h4>Upcoming Events (<%= @upcoming_events.count %>)</h4>
   <% @upcoming_events.each do |event| %>
-    <li><%= event.description %></li>
+    <li><%= link_to event.description, event_path(event) %></li>
     <li><%= event.date %></li>
   <% end %>
 </ul>
-<ul> 
+<ul>
   <h4>Upcoming Events (<%= @previous_events.count %>)</h4>
   <% @previous_events.each do |event| %>
-    <li><%= event.description %></li>
+    <li><%= link_to event.description, event_path(event) %></li>
     <li><%= event.date %></li>
   <% end %>
 </ul>
