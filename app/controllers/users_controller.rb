@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @upcoming_events = upcoming_events(@user)
-    @prev_events = previous_events(@user)
+    @upcoming_events = @user.attended_events.upcoming_events
+    @prev_events = @user.attended_events.previous_events
   end
 
   def new
@@ -26,10 +26,5 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name)
   end
 
-  def upcoming_events(user)
-    user.attended_events.where('date >= ?', Time.now)
-  end
-  def previous_events(user)
-    user.attended_events.where('date < ?', Time.now)
-  end
+  
 end
