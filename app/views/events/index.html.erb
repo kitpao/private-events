@@ -10,7 +10,7 @@
   <% end %>
 </ul>
 <ul>
-  <h4>Upcoming Events (<%= @previous_events.count %>)</h4>
+  <h4>Past Events (<%= @previous_events.count %>)</h4>
   <% @previous_events.each do |event| %>
     <li><%= link_to event.description, event_path(event) %></li>
     <li><%= event.date %></li>

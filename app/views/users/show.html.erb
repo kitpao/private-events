@@ -1,6 +1,6 @@
 <h1 class= "title"> <%= @user.name %>'s profile page! </h1>
 
-<h2 class= "subtitle"> My created events: </h2>
+<h2 class= "subtitle"> My created events: (<%= @user.created_events.count %>)</h2>
 <ul>
   <% @user.created_events.each do |event| %>
     <li><%= link_to event.description, event_path(event) %></li>
@@ -8,14 +8,14 @@
 </ul>
 
 
-<h2 class= "subtitle"> My attended events: </h2>
+<h2 class= "subtitle"> My attended events: (<%= @upcoming_events.count + @prev_events.count %>) </h2>
 
 <ul>
-  <p>Upcoming events</p>
+  <p><strong>Upcoming events </strong>(<%= @upcoming_events.count %>)</p>
   <% @upcoming_events.each do |event| %>
     <li><%= link_to event.description, event_path(event) %></li>
   <% end %>
-  <p>Previous events</p>
+  <p><strong>Previous events </strong>(<%= @prev_events.count %>)</p>
   <% @prev_events.each do |event| %>
     <li><%= link_to event.description, event_path(event) %></li>
   <% end %>
