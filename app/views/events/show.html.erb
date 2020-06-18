@@ -1,5 +1,5 @@
 <h3 class= "title"> Details for: <%= @event.description %></h3>
-
+<div class= "image_for_events"></div>
 <h4 class= "subtitle"> Organizer for this event: <%= link_to @event.host.name, user_path(@event.host) %></h4>
 <ul>
   <% @event.inviteds.each do |invited| %>

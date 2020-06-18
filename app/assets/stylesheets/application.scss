@@ -57,3 +57,10 @@
    height: 1px;
    background-color: rgba(189, 189, 189, 0.623);
  }
+
+ .image_for_events {
+   margin-left: 2rem;
+   height: 200px;
+   background:no-repeat url(https://source.unsplash.com/featured/?{event},{party});
+   background-size: contain;
+ }
