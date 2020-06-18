@@ -30,7 +30,7 @@
    text-decoration: none;
    font-family: 'Raleway', sans-serif;
  }
- 
+
 
  .forms {
   display: flex;
@@ -45,6 +45,9 @@
 
  .title {
    padding:1rem;
+ }
+ .subtitle {
+   padding-left:2rem;
  }
 
  .title::after {

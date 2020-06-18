@@ -1,11 +1,13 @@
 <header>
   <nav class='nav'>
-    <h3> Welcome to our pag </h3>
-    <% if sign_in? %>
-      <h3>e  <%= current_user.name %>!</h3>
-    <% else %>
-      <h3>e!</h3>
-    <% end %>
+    <div class= 'welcome'>
+      <h3> Welcome to our pag </h3>
+      <% if sign_in? %>
+        <h3>e  <%= current_user.name %>!</h3>
+      <% else %>
+        <h3>e!</h3>
+      <% end %>
+    </div>
     <ul>
      <% if !sign_in? %>
       <li><%= link_to 'Log in', sign_in_path  %></li>

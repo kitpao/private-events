@@ -1,0 +1,20 @@
+.flash {
+  width: 60%;
+  color: white;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 0.5rem;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.success {
+  background-color: hsl(141, 53%, 53%);
+}
+
+.notice {
+  background-color: hsl(204, 86%, 53%);
+}
+.danger {
+  background-color: hsl(348, 100%, 61%);
+}

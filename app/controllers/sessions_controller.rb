@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by_name(params[:session][:name])
     if user && !user.nil?
       session[:user_id] = user.id
+      flash[:success] = "You have logged in!"
       redirect_to user_path(user)
       #link_to dashboard
     else
