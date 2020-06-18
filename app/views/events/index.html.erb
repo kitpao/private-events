@@ -4,6 +4,7 @@
 <!--More popular events based on invitations-->
 <ul> 
   <% @events.each do |event| %>
+    <li><%= event.id %></li>
     <li><%= event.description %></li>
     <li><%= event.date %></li>
   <% end %>

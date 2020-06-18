@@ -11,7 +11,13 @@
 <h2 class= "subtitle"> My attended events: </h2>
 
 <ul>
-  <% @user.attended_events.each do |event| %>
+  <p>Upcoming events</p>
+  <% @upcoming_events.each do |event| %>
     <li><%= link_to event.description, event_path(event) %></li>
   <% end %>
+  <p>Previous events</p>
+  <% @prev_events.each do |event| %>
+    <li><%= link_to event.description, event_path(event) %></li>
+  <% end %>
+
 </ul>
