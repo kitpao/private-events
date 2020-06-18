@@ -17,12 +17,40 @@
  body {
    margin: 0;
    padding: 0;
+   font-family: 'Raleway', sans-serif;
+   background-color: rgba(216, 216, 216, 0.849);
  }
 
  li {
    list-style: none;
+   padding: 0;
  }
 
  a {
    text-decoration: none;
+   font-family: 'Raleway', sans-serif;
+ }
+ 
+
+ .forms {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  width: 25%;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.685);
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+  padding: 1rem;
+ }
+
+ .title {
+   padding:1rem;
+ }
+
+ .title::after {
+   content: '';
+   display:block;
+   width: 95%;
+   height: 1px;
+   background-color: rgba(189, 189, 189, 0.623);
  }

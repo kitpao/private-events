@@ -1,9 +1,10 @@
+<div class="forms">
 <h1>Log in form!</h1>
-
 <%= form_with scope: :session, url: sessions_path, local: true do |f| %>
   <%= f.label :name %><br>
   <%= f.text_field :name %>
   <br><br>
   <%= f.submit 'Log in!' %>
-
 <% end %>
+
+</div>

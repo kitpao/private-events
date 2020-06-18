@@ -1,0 +1,11 @@
+
+<div class="container">
+<h1 class="title">Events</h1>
+<!--More popular events based on invitations-->
+<ul> 
+  <% @events.each do |event| %>
+    <li><%= event.description %></li>
+    <li><%= event.date %></li>
+  <% end %>
+</ul>
+</div>
