@@ -7,14 +7,14 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    render json: @event
   end
 
   def new
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.host = current_user
+    @event = current_user.created_events.build(event_params)
 
     if @event.save
       redirect_to  event_path(@event)
