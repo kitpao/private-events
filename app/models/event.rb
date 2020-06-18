@@ -3,8 +3,6 @@ class Event < ApplicationRecord
   has_many :invitations
   has_many :inviteds, through: :invitations, source: :invited
 
-  def self.upcoming_events
-    self.where('date >= ?', Time.now)
-  end
+  scope :upcoming_events, -> { where('date >= ?', Time.now) }
   scope :previous_events, -> { where('date < ?', Time.now) }
 end
