@@ -3,8 +3,15 @@
 <h1 class="title">Events</h1>
 <!--More popular events based on invitations-->
 <ul> 
-  <% @events.each do |event| %>
-    <li><%= event.id %></li>
+  <h4>Upcoming Events (<%= @upcoming_events.count %>)</h4>
+  <% @upcoming_events.each do |event| %>
+    <li><%= event.description %></li>
+    <li><%= event.date %></li>
+  <% end %>
+</ul>
+<ul> 
+  <h4>Upcoming Events (<%= @previous_events.count %>)</h4>
+  <% @previous_events.each do |event| %>
     <li><%= event.description %></li>
     <li><%= event.date %></li>
   <% end %>
