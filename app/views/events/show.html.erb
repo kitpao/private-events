@@ -1,5 +1,8 @@
-<h1 class= "title"> Details for: <%= @event.description %></h1>
+<h3 class= "title"> Details for: <%= @event.description %></h3>
 
-<h2 class= "subtitle"> Organizer for this event: <%= link_to @event.host.name, user_path(@event.host) %></h2>
-
-<!-- remember to add links for events-->
+<h4 class= "subtitle"> Organizer for this event: <%= link_to @event.host.name, user_path(@event.host) %></h4>
+<ul>
+  <% @event.inviteds.each do |invited| %>
+    <li><%= link_to invited.name, user_path(invited) %></li>
+  <% end  %>
+</ul>
