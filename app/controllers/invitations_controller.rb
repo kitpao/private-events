@@ -8,7 +8,7 @@ class InvitationsController < ApplicationController
     @invitation.host = current_user
     @invitation.event_id = session[:current_event]
     #@invitation = current_user.created_events.find(session[:current_event]).invitations.build(invitations_params)
-    redirect_to root_path if @invitation.save
+    redirect_to event_path(@invitation.event_id) if @invitation.save
   end
 
   private
