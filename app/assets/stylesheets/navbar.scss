@@ -7,18 +7,28 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  .welcome {
-    padding-left: 1rem;
-    display: flex;
-    a {
-      padding: 0;
-      color: white;
-      text-decoration: none;
+    .interactions {
       display: flex;
-      font-size: 0.8rem;
+      .welcome {
+        padding-left: 1rem;
+        display: flex;
+        a {
+          padding: 0;
+          color: white;
+          text-decoration: underline;
+          display: flex;
+          font-size: 0.8rem;
+        }
+      }
+      ul {
+        display: flex;
+        a {
+          margin-right: 0.3rem;
+        }
+      }
     }
-  }
-    ul {
+
+    .sign {
       display: flex;
       justify-content: space-around;
       width: 18%;
@@ -26,7 +36,7 @@ header {
         width: 35%;
       }
     }
-   
+
    li a {
       color: white;
       background-color: hsl(171, 100%, 41%);

@@ -1,16 +1,25 @@
 <header>
   <nav class='nav'>
-    <div class= 'welcome'>
-    <%= link_to root_path do %>
-      <h3> Welcome to our pag </h3>
-      <% if sign_in? %>
-        <h3>e  <%= current_user.name %>!</h3>
-      <% else %>
-        <h3>e!</h3>
+    <div class="interactions">
+      <div class= 'welcome'>
+      <%= link_to root_path do %>
+        <h3> Welcome to our pag </h3>
+        <% if sign_in? %>
+          <h3>e  <%= current_user.name %>!</h3>
+        <% else %>
+          <h3>e!</h3>
+        <% end %>
       <% end %>
-    <% end %>
+      </div>
+      <% if sign_in? %>
+      <ul>
+        <li><%= link_to 'My events', user_path(current_user) %></li>
+        <li><%= link_to 'New event', new_event_path %></li>
+      </ul>
+      <% end %>
     </div>
-    <ul>
+
+    <ul class= "sign">
      <% if !sign_in? %>
       <li><%= link_to 'Log in', sign_in_path  %></li>
       <li><%= link_to 'Sign up', sign_up_path %></li>
