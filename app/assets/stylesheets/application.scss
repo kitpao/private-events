@@ -84,3 +84,12 @@
     grid-template-columns: repeat(auto-fit, minmax(300px,3fr));
     grid-auto-flow: row;
   }
+
+  .button {
+    margin-left: 2rem;
+    color: white;
+    background-color: hsl(171, 100%, 41%);
+    padding:.5rem;
+    border-radius: 15px;
+    font-weight: bold;
+  }
