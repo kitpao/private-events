@@ -1,10 +1,7 @@
 <div class="forms">
 <h1> Yay! Let's invite some people </h1>
   <%= form_with model: @invitation, local: true do |f| %>
-    <%= f.label :invited_id %><br>
-    <%= f.text_field :invited_id %><br>
-
-
+    <%= f.collection_select(:invited_id, User.all, :id, :name, prompt: true)  %>
 
     <br>
     <br>
