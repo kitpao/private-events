@@ -21,3 +21,16 @@
   <% end %>
 
 </ul>
+
+<h2 class="subtitle"> Next Events | Invitations </h2>
+<ul>
+  <% @user.created_events.upcoming_events.each do |event| %>
+    
+    <li>
+      <b><%=link_to event.description.capitalize, event_path(event) %></b>
+    </li>
+    <% event.invitations.each do |invitation| %>
+      <li><%= invitation.invited.name %></li>
+    <% end %>
+  <% end %>
+</ul>
