@@ -8,11 +8,19 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,600;1,200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>
+
+  <script>
+    const menu = document.getElementById('btn-menu');
+    menu.addEventListener('click', () => {
+      document.querySelector('.container-nav').classList.toggle('close');
+    });
+  </script>
   </body>
 </html>

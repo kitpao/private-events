@@ -12,13 +12,16 @@
       <% end %>
       </div>
       <% if sign_in? %>
-      <ul>
+      <ul class="hide">
         <li><%= link_to 'My events', user_path(current_user) %></li>
         <li><%= link_to 'New event', new_event_path %></li>
       </ul>
       <% end %>
     </div>
-
+     <button id="btn-menu">
+       <span class="material-icons">menu</span>
+     </button>
+     <div class="container-nav">
     <ul class= "sign">
      <% if !sign_in? %>
       <li><%= link_to 'Log in', sign_in_path  %></li>
@@ -26,6 +29,11 @@
      <% else %>
       <li><%= link_to 'Log out', session_path(session), method: :delete %></li>
      <% end %>
+     <% if sign_in? %>
+        <li><%= link_to 'My events', user_path(current_user) %></li>
+        <li><%= link_to 'New event', new_event_path %></li>
+      <% end %>
     </ul>
+    <div>
   </nav>
 </header>
