@@ -18,7 +18,7 @@ RSpec.describe Event, type: :model do
       end
 
       #let(:host_created) { FactoryBot.create(:user) }
-      let(:event_created) { FactoryBot.create(:event )}
+      let(:event_created) { FactoryBot.create(:event)}
       it 'scopes' do
 
         10.times do |i|
