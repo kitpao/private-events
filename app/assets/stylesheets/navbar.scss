@@ -10,6 +10,13 @@ header {
   .welcome {
     padding-left: 1rem;
     display: flex;
+    a {
+      padding: 0;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      font-size: 0.8rem;
+    }
   }
     ul {
       display: flex;
@@ -19,8 +26,8 @@ header {
         width: 35%;
       }
     }
-
-    a {
+   
+   li a {
       color: white;
       background-color: hsl(171, 100%, 41%);
       padding:.5rem;
