@@ -15,6 +15,9 @@ header {
       display: flex;
       justify-content: space-around;
       width: 18%;
+      @media screen and(max-width: 768px) {
+        width: 35%;
+      }
     }
 
     a {
