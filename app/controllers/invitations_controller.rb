@@ -8,8 +8,13 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new(invitation_params)
     @invitation.host = current_user
     @invitation.event_id = session[:current_event]
-    #@invitation = current_user.created_events.find(session[:current_event]).invitations.build(invitations_params)
-    redirect_to event_path(@invitation.event_id) if @invitation.save
+    if @invitation.save
+      flash[:success] = "You have sent the invitation"
+      redirect_to event_path(@invitation.event_id)
+    else
+      flash.now[:danger] = "This user has already been invited"
+      render :new
+    end
   end
 
   private

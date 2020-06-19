@@ -18,8 +18,10 @@ class EventsController < ApplicationController
     @event = current_user.created_events.build(event_params)
 
     if @event.save
+      flash[:success] = "Event was created successfully"
       redirect_to  event_path(@event)
     else
+      flash.now[:danger] = "You are missing a field"
       render :new
     end
   end
