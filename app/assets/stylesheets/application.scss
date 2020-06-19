@@ -60,17 +60,10 @@
 
  .image_for_events {
    margin-left: 2rem;
+   margin-bottom: .5rem;
    height: 200px;
    width: 300px;
-   background: no-repeat url(https://source.unsplash.com/featured/?{event},{party});
-   background-size: contain;
- }
- .image_for_events2 {
-   margin-left: 2rem;
-   height: 200px;
-   width: 300px;
-   background: no-repeat url(https://source.unsplash.com/featured/?{event},{party});
-   background-size: contain;
+   object-fit: cover;
  }
 
   .event_container {
