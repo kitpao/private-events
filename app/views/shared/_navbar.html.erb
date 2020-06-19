@@ -3,12 +3,7 @@
     <div class="interactions">
       <div class= 'welcome'>
       <%= link_to root_path do %>
-        <h3> Welcome to our pag </h3>
-        <% if sign_in? %>
-          <h3>e  <%= current_user.name %>!</h3>
-        <% else %>
-          <h3>e!</h3>
-        <% end %>
+        <h3><%= "Welcome to our page #{current_user.name if sign_in?}!" %></h3>
       <% end %>
       </div>
       <% if sign_in? %>

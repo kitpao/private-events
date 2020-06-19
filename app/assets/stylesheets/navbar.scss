@@ -16,7 +16,6 @@ header {
           padding: 0;
           color: white;
           text-decoration: underline;
-          display: flex;
           font-size: 0.8rem;
         }
       }
@@ -41,7 +40,7 @@ header {
           width: 10rem;
           transition: 600ms;
         }
-            
+
         &:hover {
           transform: scale(1.1);
           transition: 600ms;
