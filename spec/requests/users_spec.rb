@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Show user endpoint", type: :request do
-
-
   describe "GET /signup" do
     before { get '/sign_up' }
 
@@ -15,12 +13,12 @@ RSpec.describe "Show user endpoint", type: :request do
     end
   end
   describe "POST /users" do
+    let(:created_params) { { :user => {:name => 'foo1' } }}
+
+    subject { post '/users', params: created_params }
+
     it "redirects to user_path(user)" do
-      get "/sign_up"
-      expect(response).to render_template(:new)
-      post '/users', :params => { :user => { :name => "fooo" } }
-      expect(response).to redirect_to(user_path(:user))
-      follow_redirect!
+      expect(subject).to redirect_to("/users/2")
     end
   end
 end
