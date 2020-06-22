@@ -1,4 +1,3 @@
-require 'factory_bot'
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -27,7 +26,7 @@ RSpec.describe Event, type: :model do
         @events = events_created.upcoming_events
 
         expect(@events).to be_empty
-        
+
       end
    end
 
