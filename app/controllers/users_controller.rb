@@ -13,10 +13,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = "User created succesfully"
+      flash[:success] = 'User created succesfully'
       redirect_to user_path(@user)
     else
-      flash.now[:notice] = "Ups.. something went wrong"
+      flash.now[:notice] = 'Ups.. something went wrong'
       render :new
     end
   end

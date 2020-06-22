@@ -3,6 +3,6 @@ FactoryBot.define do
     description { Faker::Lorem.paragraph }
     host { nil }
     location { Faker::Lorem.sentence }
-    date { Time.now - rand(80000...100000) }
+    date { Time.now - rand(-100_000...100_000) }
   end
 end

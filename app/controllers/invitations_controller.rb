@@ -9,10 +9,10 @@ class InvitationsController < ApplicationController
     @invitation.host = current_user
     @invitation.event_id = session[:current_event]
     if @invitation.save
-      flash[:success] = "You have sent the invitation"
+      flash[:success] = 'You have sent the invitation'
       redirect_to event_path(@invitation.event_id)
     else
-      flash.now[:danger] = "This user has already been invited"
+      flash.now[:danger] = 'This user has already been invited'
       render :new
     end
   end

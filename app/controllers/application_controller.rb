@@ -6,14 +6,12 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in?
-    !!current_user
+    current_user ? true : false
   end
 
   def require_user
-    if !sign_in?
-      flash[:danger] = "You must be logged in to perform this action"
-      redirect_to root_path
-    end
+    flash[:danger] = 'You must be logged in to perform this action' unless sign_in?
+    redirect_to root_path unless sign_in?
   end
 
   def current_event
