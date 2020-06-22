@@ -1,4 +1,5 @@
 # encoding: UTF-8
+
 require 'stringio'
 require 'nokogiri/xml/node/save_options'
 
@@ -56,45 +57,45 @@ module Nokogiri
       include Enumerable
 
       # Element node type, see Nokogiri::XML::Node#element?
-      ELEMENT_NODE =       1
+      ELEMENT_NODE = 1
       # Attribute node type
-      ATTRIBUTE_NODE =     2
+      ATTRIBUTE_NODE = 2
       # Text node type, see Nokogiri::XML::Node#text?
-      TEXT_NODE =          3
+      TEXT_NODE = 3
       # CDATA node type, see Nokogiri::XML::Node#cdata?
       CDATA_SECTION_NODE = 4
       # Entity reference node type
-      ENTITY_REF_NODE =    5
+      ENTITY_REF_NODE = 5
       # Entity node type
-      ENTITY_NODE =        6
+      ENTITY_NODE = 6
       # PI node type
-      PI_NODE =            7
+      PI_NODE = 7
       # Comment node type, see Nokogiri::XML::Node#comment?
-      COMMENT_NODE =       8
+      COMMENT_NODE = 8
       # Document node type, see Nokogiri::XML::Node#xml?
-      DOCUMENT_NODE =      9
+      DOCUMENT_NODE = 9
       # Document type node type
       DOCUMENT_TYPE_NODE = 10
       # Document fragment node type
       DOCUMENT_FRAG_NODE = 11
       # Notation node type
-      NOTATION_NODE =      12
+      NOTATION_NODE = 12
       # HTML document node type, see Nokogiri::XML::Node#html?
       HTML_DOCUMENT_NODE = 13
       # DTD node type
-      DTD_NODE =           14
+      DTD_NODE = 14
       # Element declaration type
-      ELEMENT_DECL =       15
+      ELEMENT_DECL = 15
       # Attribute declaration type
-      ATTRIBUTE_DECL =     16
+      ATTRIBUTE_DECL = 16
       # Entity declaration type
-      ENTITY_DECL =        17
+      ENTITY_DECL = 17
       # Namespace declaration type
-      NAMESPACE_DECL =     18
+      NAMESPACE_DECL = 18
       # XInclude start type
-      XINCLUDE_START =     19
+      XINCLUDE_START = 19
       # XInclude end type
-      XINCLUDE_END =       20
+      XINCLUDE_END = 20
       # DOCB document node type
       DOCB_DOCUMENT_NODE = 21
 
@@ -155,12 +156,12 @@ module Nokogiri
         if first = children.first
           # Mimic the error add_child would raise.
           raise RuntimeError, "Document already has a root node" if document? && !(node_or_tags.comment? || node_or_tags.processing_instruction?)
+
           first.__send__(:add_sibling, :previous, node_or_tags)
         else
           add_child(node_or_tags)
         end
       end
-
 
       ###
       # Add html around this node
@@ -307,28 +308,28 @@ module Nokogiri
         self
       end
 
-      alias :next           :next_sibling
-      alias :previous       :previous_sibling
+      alias :next :next_sibling
+      alias :previous :previous_sibling
 
       # :stopdoc:
       # HACK: This is to work around an RDoc bug
-      alias :next=          :add_next_sibling
+      alias :next= :add_next_sibling
       # :startdoc:
 
-      alias :previous=      :add_previous_sibling
-      alias :remove         :unlink
-      alias :get_attribute  :[]
-      alias :attr           :[]
-      alias :set_attribute  :[]=
-      alias :text           :content
-      alias :inner_text     :content
+      alias :previous= :add_previous_sibling
+      alias :remove :unlink
+      alias :get_attribute :[]
+      alias :attr :[]
+      alias :set_attribute :[]=
+      alias :text :content
+      alias :inner_text :content
       alias :has_attribute? :key?
-      alias :name           :node_name
-      alias :name=          :node_name=
-      alias :type           :node_type
-      alias :to_str         :text
-      alias :clone          :dup
-      alias :elements       :element_children
+      alias :name :node_name
+      alias :name= :node_name=
+      alias :type :node_type
+      alias :to_str :text
+      alias :clone :dup
+      alias :elements :element_children
 
       ####
       # Returns a hash containing the node's attributes.  The key is
@@ -560,6 +561,7 @@ module Nokogiri
       # nil on XML documents and on unknown tags.
       def description
         return nil if document.xml?
+
         Nokogiri::HTML::ElementDescription[name]
       end
 
@@ -606,6 +608,7 @@ module Nokogiri
 
         while parents.last.respond_to?(:parent)
           break unless ctx_parent = parents.last.parent
+
           parents << ctx_parent
         end
 
@@ -652,7 +655,7 @@ module Nokogiri
       ####
       # Yields self and all children to +block+ recursively.
       def traverse &block
-        children.each{|j| j.traverse(&block) }
+        children.each { |j| j.traverse(&block) }
         block.call(self)
       end
 
@@ -667,6 +670,7 @@ module Nokogiri
       def == other
         return false unless other
         return false unless other.respond_to?(:pointer_id)
+
         pointer_id == other.pointer_id
       end
 
@@ -686,8 +690,8 @@ module Nokogiri
       #
       def serialize *args, &block
         options = args.first.is_a?(Hash) ? args.shift : {
-          :encoding   => args[0],
-          :save_with  => args[1]
+          :encoding => args[0],
+          :save_with => args[1]
         }
 
         encoding = options[:encoding] || document.encoding
@@ -750,16 +754,16 @@ module Nokogiri
       #   node.write_to(io, :indent_text => '-', :indent => 2)
       #
       def write_to io, *options
-        options       = options.first.is_a?(Hash) ? options.shift : {}
-        encoding      = options[:encoding] || options[0]
+        options = options.first.is_a?(Hash) ? options.shift : {}
+        encoding = options[:encoding] || options[0]
         if Nokogiri.jruby?
-          save_options  = options[:save_with] || options[1]
-          indent_times  = options[:indent] || 0
+          save_options = options[:save_with] || options[1]
+          indent_times = options[:indent] || 0
         else
-          save_options  = options[:save_with] || options[1] || SaveOptions::FORMAT
-          indent_times  = options[:indent] || 2
+          save_options = options[:save_with] || options[1] || SaveOptions::FORMAT
+          indent_times = options[:indent] || 2
         end
-        indent_text   = options[:indent_text] || ' '
+        indent_text = options[:indent_text] || ' '
 
         config = SaveOptions.new(save_options.to_i)
         yield config if block_given?
@@ -800,6 +804,7 @@ module Nokogiri
       def <=> other
         return nil unless other.is_a?(Nokogiri::XML::Node)
         return nil unless document == other.document
+
         compare other
       end
 
@@ -817,7 +822,7 @@ module Nokogiri
         process_xincludes(options.to_i)
       end
 
-      def canonicalize(mode=XML::XML_C14N_1_0,inclusive_namespaces=nil,with_comments=false)
+      def canonicalize(mode = XML::XML_C14N_1_0, inclusive_namespaces = nil, with_comments = false)
         c14n_root = self
         document.canonicalize(mode, inclusive_namespaces, with_comments) do |node, parent|
           tn = node.is_a?(XML::Node) ? node : parent
@@ -829,7 +834,7 @@ module Nokogiri
 
       def add_sibling next_or_previous, node_or_tags
         impl = (next_or_previous == :next) ? :add_next_sibling_node : :add_previous_sibling_node
-        iter = (next_or_previous == :next) ? :reverse_each          : :each
+        iter = (next_or_previous == :next) ? :reverse_each : :each
 
         node_or_tags = coerce node_or_tags
         if node_or_tags.is_a?(XML::NodeSet)
@@ -881,14 +886,14 @@ module Nokogiri
           return data
         end
 
-        raise ArgumentError, <<-EOERR
-Requires a Node, NodeSet or String argument, and cannot accept a #{data.class}.
-(You probably want to select a node from the Document with at() or search(), or create a new Node via Node.new().)
+        raise ArgumentError, <<~EOERR
+          Requires a Node, NodeSet or String argument, and cannot accept a #{data.class}.
+          (You probably want to select a node from the Document with at() or search(), or create a new Node via Node.new().)
         EOERR
       end
 
       # @private
-      IMPLIED_XPATH_CONTEXTS = [ './/'.freeze ].freeze # :nodoc:
+      IMPLIED_XPATH_CONTEXTS = ['.//'.freeze].freeze # :nodoc:
 
       def add_child_node_and_reparent_attrs node # :nodoc:
         add_child_node node

@@ -31,6 +31,7 @@ module Nokogiri
         def parse_memory data, encoding = 'UTF-8'
           raise ArgumentError unless data
           return unless data.length > 0
+
           ctx = ParserContext.memory(data, encoding)
           yield ctx if block_given?
           ctx.parse_with self
@@ -52,6 +53,7 @@ module Nokogiri
           raise ArgumentError unless filename
           raise Errno::ENOENT unless File.exist?(filename)
           raise Errno::EISDIR if File.directory?(filename)
+
           ctx = ParserContext.file(filename, encoding)
           yield ctx if block_given?
           ctx.parse_with self

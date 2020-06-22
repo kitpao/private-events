@@ -13,16 +13,16 @@ module Nokogiri
     # that lists the possible content for the div1 tag.
     class ElementContent
       # Possible definitions of type
-      PCDATA  = 1
+      PCDATA = 1
       ELEMENT = 2
-      SEQ     = 3
-      OR      = 4
+      SEQ = 3
+      OR = 4
 
       # Possible content occurrences
-      ONCE    = 1
-      OPT     = 2
-      MULT    = 3
-      PLUS    = 4
+      ONCE = 1
+      OPT = 2
+      MULT = 3
+      PLUS = 4
 
       attr_reader :document
 

@@ -25,7 +25,7 @@ def openbsd?
 end
 
 def nix?
-  ! (windows? || solaris? || darwin?)
+  !(windows? || solaris? || darwin?)
 end
 
 def sh_export_path path
@@ -50,33 +50,33 @@ def sh_export_path path
 end
 
 def do_help
-  print <<HELP
-usage: ruby #{$0} [options]
-
-    --disable-clean
-        Do not clean out intermediate files after successful build.
-
-    --disable-static
-        Do not statically link bundled libraries.
-
-    --with-iconv-dir=DIR
-        Use the iconv library placed under DIR.
-
-    --with-zlib-dir=DIR
-        Use the zlib library placed under DIR.
-
-    --use-system-libraries
-        Use system libraries instead of building and using the bundled
-        libraries.
-
-    --with-xml2-dir=DIR / --with-xml2-config=CONFIG
-    --with-xslt-dir=DIR / --with-xslt-config=CONFIG
-    --with-exslt-dir=DIR / --with-exslt-config=CONFIG
-        Use libxml2/libxslt/libexslt as specified.
-
-    --enable-cross-build
-        Do cross-build.
-HELP
+  print <<~HELP
+    usage: ruby #{$0} [options]
+    
+        --disable-clean
+            Do not clean out intermediate files after successful build.
+    
+        --disable-static
+            Do not statically link bundled libraries.
+    
+        --with-iconv-dir=DIR
+            Use the iconv library placed under DIR.
+    
+        --with-zlib-dir=DIR
+            Use the zlib library placed under DIR.
+    
+        --use-system-libraries
+            Use system libraries instead of building and using the bundled
+            libraries.
+    
+        --with-xml2-dir=DIR / --with-xml2-config=CONFIG
+        --with-xslt-dir=DIR / --with-xslt-config=CONFIG
+        --with-exslt-dir=DIR / --with-exslt-config=CONFIG
+            Use libxml2/libxslt/libexslt as specified.
+    
+        --enable-cross-build
+            Do cross-build.
+  HELP
   exit! 0
 end
 
@@ -85,7 +85,7 @@ def do_clean
   require 'fileutils'
 
   root = Pathname(ROOT)
-  pwd  = Pathname(Dir.pwd)
+  pwd = Pathname(Dir.pwd)
 
   # Skip if this is a development work tree
   unless (root + '.git').exist?
@@ -110,22 +110,22 @@ def do_clean
   exit! 0
 end
 
-def package_config pkg, options={}
+def package_config pkg, options = {}
   package = pkg_config(pkg)
   return package if package
 
   begin
     require 'rubygems'
-    gem 'pkg-config', (gem_ver='~> 1.1')
+    gem 'pkg-config', (gem_ver = '~> 1.1')
     require 'pkg-config' and message("Using pkg-config gem version #{PKGConfig::VERSION}\n")
   rescue LoadError
     message "pkg-config could not be used to find #{pkg}\nPlease install either `pkg-config` or the pkg-config gem per\n\n    gem install pkg-config -v #{gem_ver.inspect}\n\n"
   else
     return nil unless PKGConfig.have_package(pkg)
 
-    cflags  = PKGConfig.cflags(pkg)
+    cflags = PKGConfig.cflags(pkg)
     ldflags = PKGConfig.libs_only_L(pkg)
-    libs    = PKGConfig.libs_only_l(pkg)
+    libs = PKGConfig.libs_only_l(pkg)
 
     Logging::message "PKGConfig package configuration for %s\n", pkg
     Logging::message "cflags: %s\nldflags: %s\nlibs: %s\n\n", cflags, ldflags, libs
@@ -135,21 +135,21 @@ def package_config pkg, options={}
 end
 
 def nokogiri_try_compile
-  try_compile "int main() {return 0;}", "", {werror: true}
+  try_compile "int main() {return 0;}", "", { werror: true }
 end
 
-def check_libxml_version version=nil
+def check_libxml_version version = nil
   source = if version.nil?
-             <<-SRC
-#include <libxml/xmlversion.h>
+             <<~SRC
+               #include <libxml/xmlversion.h>
              SRC
            else
              version_int = sprintf "%d%2.2d%2.2d", *(version.split("."))
-             <<-SRC
-#include <libxml/xmlversion.h>
-#if LIBXML_VERSION < #{version_int}
-#error libxml2 is older than #{version}
-#endif
+             <<~SRC
+               #include <libxml/xmlversion.h>
+               #if LIBXML_VERSION < #{version_int}
+               #error libxml2 is older than #{version}
+               #endif
              SRC
            end
 
@@ -193,16 +193,16 @@ def have_iconv?(using = nil)
       preserving_globals do
         yield if block_given?
 
-        try_link(<<-'SRC', opt)
-#include <stdlib.h>
-#include <iconv.h>
-
-int main(void)
-{
-    iconv_t cd = iconv_open("", "");
-    iconv(cd, NULL, NULL, NULL, NULL);
-    return EXIT_SUCCESS;
-}
+        try_link(<<~'SRC', opt)
+          #include <stdlib.h>
+          #include <iconv.h>
+          
+          int main(void)
+          {
+              iconv_t cd = iconv_open("", "");
+              iconv(cd, NULL, NULL, NULL, NULL);
+              return EXIT_SUCCESS;
+          }
         SRC
       end
     end
@@ -214,7 +214,7 @@ def iconv_configure_flags
   # the first priority
   %w[iconv opt].each do |name|
     if (config = preserving_globals { dir_config(name) }).any? &&
-        have_iconv?("--with-#{name}-* flags") { dir_config(name) }
+       have_iconv?("--with-#{name}-* flags") { dir_config(name) }
       idirs, ldirs = config.map do |dirs|
         Array(dirs).flat_map do |dir|
           dir.split(File::PATH_SEPARATOR)
@@ -270,7 +270,7 @@ def process_recipe(name, version, static_p, cross_p)
     yield recipe
 
     env = Hash.new do |hash, key|
-      hash[key] = "#{ENV[key]}"  # (ENV[key].dup rescue '')
+      hash[key] = "#{ENV[key]}" # (ENV[key].dup rescue '')
     end
 
     recipe.configure_options.flatten!
@@ -317,11 +317,11 @@ def process_recipe(name, version, static_p, cross_p)
       "#{key}=#{value}"
     end
 
-    message <<-"EOS"
-************************************************************************
-IMPORTANT NOTICE:
-
-Building Nokogiri with a packaged version of #{name}-#{version}#{'.' if recipe.patch_files.empty?}
+    message <<~"EOS"
+      ************************************************************************
+      IMPORTANT NOTICE:
+      
+      Building Nokogiri with a packaged version of #{name}-#{version}#{'.' if recipe.patch_files.empty?}
     EOS
 
     unless recipe.patch_files.empty?
@@ -332,31 +332,31 @@ Building Nokogiri with a packaged version of #{name}-#{version}#{'.' if recipe.p
       end
     end
 
-    message <<-"EOS"
-
-Team Nokogiri will keep on doing their best to provide security
-updates in a timely manner, but if this is a concern for you and want
-to use the system library instead; abort this installation process and
-reinstall nokogiri as follows:
-
-    gem install nokogiri -- --use-system-libraries
-        [--with-xml2-config=/path/to/xml2-config]
-        [--with-xslt-config=/path/to/xslt-config]
-
-If you are using Bundler, tell it to use the option:
-
-    bundle config build.nokogiri --use-system-libraries
-    bundle install
+    message <<~"EOS"
+      
+      Team Nokogiri will keep on doing their best to provide security
+      updates in a timely manner, but if this is a concern for you and want
+      to use the system library instead; abort this installation process and
+      reinstall nokogiri as follows:
+      
+          gem install nokogiri -- --use-system-libraries
+              [--with-xml2-config=/path/to/xml2-config]
+              [--with-xslt-config=/path/to/xslt-config]
+      
+      If you are using Bundler, tell it to use the option:
+      
+          bundle config build.nokogiri --use-system-libraries
+          bundle install
     EOS
 
-    message <<-"EOS" if name == 'libxml2'
-
-Note, however, that nokogiri is not fully compatible with arbitrary
-versions of libxml2 provided by OS/package vendors.
+    message <<~"EOS" if name == 'libxml2'
+      
+      Note, however, that nokogiri is not fully compatible with arbitrary
+      versions of libxml2 provided by OS/package vendors.
     EOS
 
-    message <<-"EOS"
-************************************************************************
+    message <<~"EOS"
+      ************************************************************************
     EOS
 
     checkpoint = "#{recipe.target}/#{recipe.name}-#{recipe.version}-#{recipe.host}.installed"
@@ -452,8 +452,8 @@ when using_system_libraries?
   # Using system libraries means we rely on the system libxml2 with
   # regard to the iconv support.
 
-  dir_config('xml2').any?  or package_config('libxml-2.0')
-  dir_config('xslt').any?  or package_config('libxslt')
+  dir_config('xml2').any? or package_config('libxml-2.0')
+  dir_config('xslt').any? or package_config('libxslt')
   dir_config('exslt').any? or package_config('libexslt')
 
   check_libxml_version or abort "ERROR: cannot discover where libxml2 is located on your system. please make sure `pkg-config` is installed."
@@ -483,9 +483,9 @@ else
   if cross_build_p || windows?
     zlib_recipe = process_recipe("zlib", dependencies["zlib"]["version"], static_p, cross_build_p) do |recipe|
       recipe.files = [{
-          url: "http://zlib.net/fossils/#{recipe.name}-#{recipe.version}.tar.gz",
-          sha256: dependencies["zlib"]["sha256"]
-        }]
+        url: "http://zlib.net/fossils/#{recipe.name}-#{recipe.version}.tar.gz",
+        sha256: dependencies["zlib"]["sha256"]
+      }]
       class << recipe
         attr_accessor :cross_build_p
 
@@ -504,7 +504,7 @@ else
 
         def configured?
           Dir.chdir work_path do
-            !! (File.read('win32/Makefile.gcc') =~ /^BINARY_PATH/)
+            !!(File.read('win32/Makefile.gcc') =~ /^BINARY_PATH/)
           end
         end
 
@@ -521,9 +521,9 @@ else
 
     libiconv_recipe = process_recipe("libiconv", dependencies["libiconv"]["version"], static_p, cross_build_p) do |recipe|
       recipe.files = [{
-          url: "http://ftp.gnu.org/pub/gnu/libiconv/#{recipe.name}-#{recipe.version}.tar.gz",
-          sha256: dependencies["libiconv"]["sha256"]
-        }]
+        url: "http://ftp.gnu.org/pub/gnu/libiconv/#{recipe.name}-#{recipe.version}.tar.gz",
+        sha256: dependencies["libiconv"]["sha256"]
+      }]
       recipe.configure_options += [
         "CPPFLAGS=-Wall",
         "CFLAGS=-O2 -g",
@@ -533,18 +533,18 @@ else
     end
   else
     if darwin? && !have_header('iconv.h')
-      abort <<'EOM'.chomp
------
-The file "iconv.h" is missing in your build environment,
-which means you haven't installed Xcode Command Line Tools properly.
-
-To install Command Line Tools, try running `xcode-select --install` on
-terminal and follow the instructions.  If it fails, open Xcode.app,
-select from the menu "Xcode" - "Open Developer Tool" - "More Developer
-Tools" to open the developer site, download the installer for your OS
-version and run it.
------
-EOM
+      abort <<~'EOM'.chomp
+        -----
+        The file "iconv.h" is missing in your build environment,
+        which means you haven't installed Xcode Command Line Tools properly.
+        
+        To install Command Line Tools, try running `xcode-select --install` on
+        terminal and follow the instructions.  If it fails, open Xcode.app,
+        select from the menu "Xcode" - "Open Developer Tool" - "More Developer
+        Tools" to open the developer site, download the installer for your OS
+        version and run it.
+        -----
+      EOM
     end
   end
 
@@ -556,9 +556,9 @@ EOM
 
   libxml2_recipe = process_recipe("libxml2", dependencies["libxml2"]["version"], static_p, cross_build_p) do |recipe|
     recipe.files = [{
-        url: "http://xmlsoft.org/sources/#{recipe.name}-#{recipe.version}.tar.gz",
-        sha256: dependencies["libxml2"]["sha256"]
-      }]
+      url: "http://xmlsoft.org/sources/#{recipe.name}-#{recipe.version}.tar.gz",
+      sha256: dependencies["libxml2"]["sha256"]
+    }]
     recipe.configure_options += [
       "--without-python",
       "--without-readline",
@@ -573,9 +573,9 @@ EOM
 
   libxslt_recipe = process_recipe("libxslt", dependencies["libxslt"]["version"], static_p, cross_build_p) do |recipe|
     recipe.files = [{
-        url: "http://xmlsoft.org/sources/#{recipe.name}-#{recipe.version}.tar.gz",
-        sha256: dependencies["libxslt"]["sha256"]
-      }]
+      url: "http://xmlsoft.org/sources/#{recipe.name}-#{recipe.version}.tar.gz",
+      sha256: dependencies["libxslt"]["sha256"]
+    }]
     recipe.configure_options += [
       "--without-python",
       "--without-crypto",
@@ -651,13 +651,13 @@ EOM
 end
 
 {
-  "xml2"  => ['xmlParseDoc',            'libxml/parser.h'],
-  "xslt"  => ['xsltParseStylesheetDoc', 'libxslt/xslt.h'],
-  "exslt" => ['exsltFuncRegister',      'libexslt/exslt.h'],
+  "xml2" => ['xmlParseDoc', 'libxml/parser.h'],
+  "xslt" => ['xsltParseStylesheetDoc', 'libxslt/xslt.h'],
+  "exslt" => ['exsltFuncRegister', 'libexslt/exslt.h'],
 }.each do |lib, (func, header)|
   have_func(func, header) ||
-  have_library(lib, func, header) ||
-  have_library("lib#{lib}", func, header) or
+    have_library(lib, func, header) ||
+    have_library("lib#{lib}", func, header) or
     asplode("lib#{lib}")
 end
 
@@ -674,12 +674,12 @@ create_makefile('nokogiri/nokogiri')
 if enable_config('clean', true)
   # Do not clean if run in a development work tree.
   File.open('Makefile', 'at') do |mk|
-    mk.print <<EOF
-all: clean-ports
-
-clean-ports: $(DLLIB)
-	-$(Q)$(RUBY) $(srcdir)/extconf.rb --clean --#{static_p ? 'enable' : 'disable'}-static
-EOF
+    mk.print <<~EOF
+      all: clean-ports
+      
+      clean-ports: $(DLLIB)
+      	-$(Q)$(RUBY) $(srcdir)/extconf.rb --clean --#{static_p ? 'enable' : 'disable'}-static
+    EOF
   end
 end
 

@@ -12,8 +12,8 @@ module Nokogiri
       # I'm ignoring unicode characters here.
       # See http://www.w3.org/TR/REC-xml-names/#ns-decl for more details.
       NCNAME_START_CHAR = "A-Za-z_"
-      NCNAME_CHAR       = NCNAME_START_CHAR + "\\-.0-9"
-      NCNAME_RE         = /^xmlns(:[#{NCNAME_START_CHAR}][#{NCNAME_CHAR}]*)?$/
+      NCNAME_CHAR = NCNAME_START_CHAR + "\\-.0-9"
+      NCNAME_RE = /^xmlns(:[#{NCNAME_START_CHAR}][#{NCNAME_CHAR}]*)?$/
 
       ##
       # Parse an XML file.
@@ -55,11 +55,11 @@ module Nokogiri
         end
 
         doc = if string_or_io.respond_to?(:read)
-          url ||= string_or_io.respond_to?(:path) ? string_or_io.path : nil
-          read_io(string_or_io, url, encoding, options.to_i)
-        else
-          # read_memory pukes on empty docs
-          read_memory(string_or_io, url, encoding, options.to_i)
+                url ||= string_or_io.respond_to?(:path) ? string_or_io.path : nil
+                read_io(string_or_io, url, encoding, options.to_i)
+              else
+                # read_memory pukes on empty docs
+                read_memory(string_or_io, url, encoding, options.to_i)
         end
 
         # do xinclude processing
@@ -72,7 +72,7 @@ module Nokogiri
       attr_accessor :errors
 
       def initialize *args # :nodoc:
-        @errors     = []
+        @errors = []
         @decorators = nil
       end
 
@@ -90,7 +90,7 @@ module Nokogiri
         args.each do |arg|
           case arg
           when Hash
-            arg.each { |k,v|
+            arg.each { |k, v|
               key = k.to_s
               if key =~ NCNAME_RE
                 ns_name = key.split(":", 2)[1]
@@ -166,7 +166,7 @@ module Nokogiri
       #
       def collect_namespaces
         xpath("//namespace::*").inject({}) do |hash, ns|
-          hash[["xmlns",ns.prefix].compact.join(":")] = ns.href if ns.prefix != "xml"
+          hash[["xmlns", ns.prefix].compact.join(":")] = ns.href if ns.prefix != "xml"
           hash
         end
       end
@@ -182,6 +182,7 @@ module Nokogiri
       # the document or +nil+ when there is no DTD.
       def validate
         return nil unless internal_subset
+
         internal_subset.validate self
       end
 
@@ -214,8 +215,10 @@ module Nokogiri
       # Apply any decorators to +node+
       def decorate node
         return unless @decorators
-        @decorators.each { |klass,list|
+
+        @decorators.each { |klass, list|
           next unless node.is_a?(klass)
+
           list.each { |moodule| node.extend(moodule) }
         }
       end
@@ -241,9 +244,11 @@ module Nokogiri
 
       def add_child node_or_tags
         raise "A document may not have multiple root nodes." if (root && root.name != 'nokogiri_text_wrapper') && !(node_or_tags.comment? || node_or_tags.processing_instruction?)
+
         node_or_tags = coerce(node_or_tags)
         if node_or_tags.is_a?(XML::NodeSet)
           raise "A document may not have multiple root nodes." if node_or_tags.size > 1
+
           super(node_or_tags.first)
         else
           super
@@ -256,6 +261,7 @@ module Nokogiri
       # Wraps Java's org.w3c.dom.document and returns Nokogiri::XML::Document
       def self.wrap document
         raise "JRuby only method" unless Nokogiri.jruby?
+
         return wrapJavaDocument(document)
       end
 
@@ -264,10 +270,12 @@ module Nokogiri
       # Returns Java's org.w3c.dom.document of this Document.
       def to_java
         raise "JRuby only method" unless Nokogiri.jruby?
+
         return toJavaDocument()
       end
 
       private
+
       def self.empty_doc? string_or_io
         string_or_io.nil? ||
           (string_or_io.respond_to?(:empty?) && string_or_io.empty?) ||
@@ -275,7 +283,7 @@ module Nokogiri
       end
 
       # @private
-      IMPLIED_XPATH_CONTEXTS = [ '//'.freeze ].freeze # :nodoc:
+      IMPLIED_XPATH_CONTEXTS = ['//'.freeze].freeze # :nodoc:
 
       def inspect_attributes
         [:name, :children]

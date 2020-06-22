@@ -19,7 +19,7 @@ class EventsController < ApplicationController
 
     if @event.save
       flash[:success] = "Event was created successfully"
-      redirect_to  event_path(@event)
+      redirect_to event_path(@event)
     else
       flash.now[:danger] = "You are missing a field"
       render :new
@@ -27,7 +27,8 @@ class EventsController < ApplicationController
   end
 
   private
-    def event_params
-      params.require(:event).permit(:description, :location, :date)
-    end
+
+  def event_params
+    params.require(:event).permit(:description, :location, :date)
+  end
 end

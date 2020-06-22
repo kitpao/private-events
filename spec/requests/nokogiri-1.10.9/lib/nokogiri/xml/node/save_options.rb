@@ -5,30 +5,30 @@ module Nokogiri
       # Save options for serializing nodes
       class SaveOptions
         # Format serialized xml
-        FORMAT          = 1
+        FORMAT = 1
         # Do not include declarations
-        NO_DECLARATION  = 2
+        NO_DECLARATION = 2
         # Do not include empty tags
-        NO_EMPTY_TAGS   = 4
+        NO_EMPTY_TAGS = 4
         # Do not save XHTML
-        NO_XHTML        = 8
+        NO_XHTML = 8
         # Save as XHTML
-        AS_XHTML        = 16
+        AS_XHTML = 16
         # Save as XML
-        AS_XML          = 32
+        AS_XML = 32
         # Save as HTML
-        AS_HTML         = 64
+        AS_HTML = 64
 
         if Nokogiri.jruby?
           # Save builder created document
-          AS_BUILDER    = 128
+          AS_BUILDER = 128
           # the default for XML documents
-          DEFAULT_XML  = AS_XML # https://github.com/sparklemotion/nokogiri/issues/#issue/415
+          DEFAULT_XML = AS_XML # https://github.com/sparklemotion/nokogiri/issues/#issue/415
           # the default for HTML document
           DEFAULT_HTML = NO_DECLARATION | NO_EMPTY_TAGS | AS_HTML
         else
           # the default for XML documents
-          DEFAULT_XML  = FORMAT | AS_XML
+          DEFAULT_XML = FORMAT | AS_XML
           # the default for HTML document
           DEFAULT_HTML = FORMAT | NO_DECLARATION | NO_EMPTY_TAGS | AS_HTML
         end

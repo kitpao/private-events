@@ -5,6 +5,7 @@ module Nokogiri
       attr_reader :document
 
       private
+
       def inspect_attributes
         [:prefix, :href]
       end

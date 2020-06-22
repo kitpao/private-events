@@ -4,8 +4,8 @@ module Nokogiri
   module CSS
     class Parser < Racc::Parser
       @cache_on = true
-      @cache    = {}
-      @mutex    = Mutex.new
+      @cache = {}
+      @mutex = Mutex.new
 
       class << self
         # Turn on CSS parse caching
@@ -16,12 +16,14 @@ module Nokogiri
         # Get the css selector in +string+ from the cache
         def [] string
           return unless @cache_on
+
           @mutex.synchronize { @cache[string] }
         end
 
         # Set the css selector in +string+ in the cache to +value+
         def []= string, value
           return value unless @cache_on
+
           @mutex.synchronize { @cache[string] = value }
         end
 
@@ -52,7 +54,7 @@ module Nokogiri
 
       # Create a new CSS parser with respect to +namespaces+
       def initialize namespaces = {}
-        @tokenizer  = Tokenizer.new
+        @tokenizer = Tokenizer.new
         @namespaces = namespaces
         super()
       end
@@ -67,7 +69,7 @@ module Nokogiri
       end
 
       # Get the xpath for +string+ using +options+
-      def xpath_for string, options={}
+      def xpath_for string, options = {}
         key = "#{string}#{options[:ns]}#{options[:prefix]}"
         v = self.class[key]
         return v if v

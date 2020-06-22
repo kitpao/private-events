@@ -11,7 +11,7 @@ module Nokogiri
       # Regular expression used by Searchable#search to determine if a query
       # string is CSS or XPath
       LOOKS_LIKE_XPATH = /^(\.\/|\/|\.\.|\.$)/
-      
+
       ###
       # call-seq: search *paths, [namespace-bindings, xpath-variable-bindings, custom-handler-class]
       #
@@ -191,7 +191,7 @@ module Nokogiri
         ctx.register_namespaces(ns)
         path = path.gsub(/xmlns:/, ' :') unless Nokogiri.uses_libxml?
 
-        binds.each do |key,value|
+        binds.each do |key, value|
           ctx.register_variable key.to_s, value
         end if binds
 

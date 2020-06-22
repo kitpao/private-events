@@ -41,9 +41,9 @@ module Nokogiri
 
       def to_s
         message = super.chomp
-        [location_to_s, level_to_s, message].
-          compact.join(": ").
-          force_encoding(message.encoding)
+        [location_to_s, level_to_s, message]
+          .compact.join(": ")
+          .force_encoding(message.encoding)
       end
 
       private
@@ -63,6 +63,7 @@ module Nokogiri
 
       def location_to_s
         return nil if nil_or_zero?(line) && nil_or_zero?(column)
+
         "#{line}:#{column}"
       end
     end

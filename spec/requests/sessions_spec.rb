@@ -14,7 +14,7 @@ RSpec.describe "Log in", type: :request do
   describe "POST /sessions" do
     user = User.create(name: 'foo')
 
-    subject { post '/sessions', :params => { :session => { name:'foo' } } }
+    subject { post '/sessions', :params => { :session => { name: 'foo' } } }
 
     it "redirects to user_path(user)" do
       expect(subject).to redirect_to('/users/1')

@@ -327,6 +327,7 @@ module Nokogiri
 
         @parent.ancestors.each do |a|
           next if a == doc
+
           @ns = a.namespace_definitions.find { |x| x.prefix == ns.to_s }
           return self if @ns
         end
@@ -371,6 +372,7 @@ module Nokogiri
             if node.namespace.nil?
               raise ArgumentError, "Namespace #{@ns[:pending]} has not been defined"
             end
+
             @ns = nil
           end
 

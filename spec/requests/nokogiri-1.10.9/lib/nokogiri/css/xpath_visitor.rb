@@ -2,7 +2,6 @@ module Nokogiri
   module CSS
     class XPathVisitor # :nodoc:
       def visit_function node
-
         msg = :"visit_function_#{node.value.first.gsub(/[(]/, '')}"
         return self.send(msg, node) if self.respond_to?(msg)
 
@@ -23,7 +22,7 @@ module Nokogiri
           if node.value[1].is_a?(Nokogiri::CSS::Node) and node.value[1].type == :NTH
             nth(node.value[1], :child => true)
           else
-            "count(preceding-sibling::*) = #{node.value[1].to_i-1}"
+            "count(preceding-sibling::*) = #{node.value[1].to_i - 1}"
           end
         when /^nth-last-of-type\(/
           if node.value[1].is_a?(Nokogiri::CSS::Node) and node.value[1].type == :NTH
@@ -36,7 +35,7 @@ module Nokogiri
           if node.value[1].is_a?(Nokogiri::CSS::Node) and node.value[1].type == :NTH
             nth(node.value[1], :last => true, :child => true)
           else
-            "count(following-sibling::*) = #{node.value[1].to_i-1}"
+            "count(following-sibling::*) = #{node.value[1].to_i - 1}"
           end
         when /^(first|first-of-type)\(/
           "position() = 1"
@@ -73,11 +72,11 @@ module Nokogiri
       end
 
       def visit_attribute_condition node
-         attribute = if (node.value.first.type == :FUNCTION) or (node.value.first.value.first =~ /::/)
-                       ''
-                     else
-                       '@'
-                     end
+        attribute = if (node.value.first.type == :FUNCTION) or (node.value.first.value.first =~ /::/)
+                      ''
+                    else
+                      '@'
+                    end
         attribute += node.value.first.accept(self)
 
         # Support non-standard css
@@ -88,7 +87,7 @@ module Nokogiri
         value = node.value.last
         value = "'#{value}'" if value !~ /^['"]/
 
-        if (value[0]==value[-1]) && %q{"'}.include?(value[0])
+        if (value[0] == value[-1]) && %q{"'}.include?(value[0])
           str_value = value[1..-2]
           if str_value.include?(value[0])
             value = 'concat("' + str_value.split('"', -1).join(%q{", '"', "}) + '", "")'
@@ -154,11 +153,11 @@ module Nokogiri
       end
 
       {
-        'direct_adjacent_selector'  => "/following-sibling::*[1]/self::",
-        'following_selector'        => "/following-sibling::",
-        'descendant_selector'       => '//',
-        'child_selector'            => '/',
-      }.each do |k,v|
+        'direct_adjacent_selector' => "/following-sibling::*[1]/self::",
+        'following_selector' => "/following-sibling::",
+        'descendant_selector' => '//',
+        'child_selector' => '/',
+      }.each do |k, v|
         class_eval %{
           def visit_#{k} node
             "\#{node.value.first.accept(self) if node.value.first}#{v}\#{node.value.last.accept(self)}"
@@ -168,7 +167,7 @@ module Nokogiri
 
       def visit_conditional_selector node
         node.value.first.accept(self) + '[' +
-        node.value.last.accept(self) + ']'
+          node.value.last.accept(self) + ']'
       end
 
       def visit_element_name node
@@ -179,15 +178,16 @@ module Nokogiri
         node.accept(self)
       end
 
-    private
-      def nth node, options={}
+      private
+
+      def nth node, options = {}
         raise ArgumentError, "expected an+b node to contain 4 tokens, but is #{node.value.inspect}" unless node.value.size == 4
 
         a, b = read_a_and_positive_b node.value
         position = if options[:child]
-          options[:last] ? "(count(following-sibling::*) + 1)" : "(count(preceding-sibling::*) + 1)"
-        else
-          options[:last] ? "(last()-position()+1)" : "position()"
+                     options[:last] ? "(count(following-sibling::*) + 1)" : "(count(preceding-sibling::*) + 1)"
+                   else
+                     options[:last] ? "(last()-position()+1)" : "position()"
         end
 
         if b.zero?
@@ -217,7 +217,7 @@ module Nokogiri
       end
 
       def is_of_type_pseudo_class? node
-        if node.type==:PSEUDO_CLASS
+        if node.type == :PSEUDO_CLASS
           if node.value[0].is_a?(Nokogiri::CSS::Node) and node.value[0].type == :FUNCTION
             node.value[0].value[0]
           else

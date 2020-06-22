@@ -37,11 +37,11 @@ module Nokogiri
       # Quote parameters in +params+ for stylesheet safety
       def quote_params params
         parray = (params.instance_of?(Hash) ? params.to_a.flatten : params).dup
-        parray.each_with_index do |v,i|
+        parray.each_with_index do |v, i|
           if i % 2 > 0
-            parray[i]=
+            parray[i] =
               if v =~ /'/
-                "concat('#{ v.gsub(/'/, %q{', "'", '}) }')"
+                "concat('#{v.gsub(/'/, %q{', "'", '})}')"
               else
                 "'#{v}'";
               end

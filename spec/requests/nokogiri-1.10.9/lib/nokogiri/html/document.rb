@@ -108,11 +108,11 @@ module Nokogiri
           head = html.prepend_child(XML::Node.new('head', self))
           head.prepend_child(element)
         when first = children.find { |node|
-            case node
-            when XML::Element, XML::Text
-              true
-            end
-          }
+               case node
+               when XML::Element, XML::Text
+                 true
+               end
+             }
           # We reach here only if the underlying document model
           # allows <html>/<head> elements to be omitted and does not
           # automatically supply them.
@@ -160,7 +160,6 @@ module Nokogiri
         # Nokogiri::XML::ParseOptions::RECOVER.  See the constants in
         # Nokogiri::XML::ParseOptions.
         def parse string_or_io, url = nil, encoding = nil, options = XML::ParseOptions::DEFAULT_HTML
-
           options = Nokogiri::XML::ParseOptions.new(options) if Integer === options
           # Give the options to the user
           yield options if block_given?
@@ -218,14 +217,15 @@ module Nokogiri
       class EncodingReader # :nodoc:
         class SAXHandler < Nokogiri::XML::SAX::Document # :nodoc:
           attr_reader :encoding
-          
+
           def initialize
             @encoding = nil
             super()
           end
-    
+
           def start_element(name, attrs = [])
             return unless name == 'meta'
+
             attr = Hash[attrs]
             charset = attr['charset'] and
               @encoding = charset
@@ -236,7 +236,7 @@ module Nokogiri
               @encoding = m[1]
           end
         end
-        
+
         class JumpSAXHandler < SAXHandler
           def initialize(jumptag)
             @jumptag = jumptag
@@ -254,6 +254,7 @@ module Nokogiri
           if Nokogiri.jruby? && EncodingReader.is_jruby_without_fix?
             return EncodingReader.detect_encoding_for_jruby_without_fix(chunk)
           end
+
           m = chunk.match(/\A(<\?xml[ \t\r\n]+[^>]*>)/) and
             return Nokogiri.XML(m[1]).encoding
 

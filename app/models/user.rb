@@ -5,7 +5,6 @@ class User < ApplicationRecord
   has_many :attended_events, through: :received_invitations, source: :event
 
   validates :name, presence: true,
-            uniqueness: { case_sensitive: false },
-            length: { minimum: 3, maximum: 50 }
-
+                   uniqueness: { case_sensitive: false },
+                   length: { minimum: 3, maximum: 50 }
 end

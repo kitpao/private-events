@@ -4,5 +4,5 @@ class Invitation < ApplicationRecord
   belongs_to :invited, class_name: 'User'
 
   validates :invited_id, presence: true
-  validates :event_id, uniqueness: { scope: :invited_id}
+  validates :event_id, uniqueness: { scope: :invited_id }
 end

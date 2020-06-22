@@ -6,6 +6,7 @@ module Nokogiri
       alias :content= :value=
 
       private
+
       def inspect_attributes
         [:name, :namespace, :value]
       end

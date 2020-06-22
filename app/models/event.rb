@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   scope :previous_events, -> { where('date < ?', Time.now) }
 
   validates :description, presence: true,
-            uniqueness: { case_sensitive: false }
+                          uniqueness: { case_sensitive: false }
 
   validates :location, presence: true
 

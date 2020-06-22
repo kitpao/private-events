@@ -13,7 +13,7 @@ RSpec.describe "Show user endpoint", type: :request do
     end
   end
   describe "POST /users" do
-    let(:created_params) { { :user => {:name => 'foo1' } }}
+    let(:created_params) { { :user => { :name => 'foo1' } } }
 
     subject { post '/users', params: created_params }
 

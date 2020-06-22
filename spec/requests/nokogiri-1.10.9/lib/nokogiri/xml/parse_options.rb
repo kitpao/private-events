@@ -26,50 +26,50 @@ module Nokogiri
     #
     class ParseOptions
       # Strict parsing
-      STRICT      = 0
+      STRICT = 0
       # Recover from errors
-      RECOVER     = 1 << 0
+      RECOVER = 1 << 0
       # Substitute entities
-      NOENT       = 1 << 1
+      NOENT = 1 << 1
       # Load external subsets
-      DTDLOAD     = 1 << 2
+      DTDLOAD = 1 << 2
       # Default DTD attributes
-      DTDATTR     = 1 << 3
+      DTDATTR = 1 << 3
       # validate with the DTD
-      DTDVALID    = 1 << 4
+      DTDVALID = 1 << 4
       # suppress error reports
-      NOERROR     = 1 << 5
+      NOERROR = 1 << 5
       # suppress warning reports
-      NOWARNING   = 1 << 6
+      NOWARNING = 1 << 6
       # pedantic error reporting
-      PEDANTIC    = 1 << 7
+      PEDANTIC = 1 << 7
       # remove blank nodes
-      NOBLANKS    = 1 << 8
+      NOBLANKS = 1 << 8
       # use the SAX1 interface internally
-      SAX1        = 1 << 9
+      SAX1 = 1 << 9
       # Implement XInclude substitution
-      XINCLUDE    = 1 << 10
+      XINCLUDE = 1 << 10
       # Forbid network access. Recommended for dealing with untrusted documents.
-      NONET       = 1 << 11
+      NONET = 1 << 11
       # Do not reuse the context dictionary
-      NODICT      = 1 << 12
+      NODICT = 1 << 12
       # remove redundant namespaces declarations
-      NSCLEAN     = 1 << 13
+      NSCLEAN = 1 << 13
       # merge CDATA as text nodes
-      NOCDATA     = 1 << 14
+      NOCDATA = 1 << 14
       # do not generate XINCLUDE START/END nodes
-      NOXINCNODE  = 1 << 15
+      NOXINCNODE = 1 << 15
       # compact small text nodes; no modification of the tree allowed afterwards (will possibly crash if you try to modify the tree)
-      COMPACT     = 1 << 16
+      COMPACT = 1 << 16
       # parse using XML-1.0 before update 5
-      OLD10       = 1 << 17
+      OLD10 = 1 << 17
       # do not fixup XINCLUDE xml:base uris
-      NOBASEFIX   = 1 << 18
+      NOBASEFIX = 1 << 18
       # relax any hardcoded limit from the parser
-      HUGE        = 1 << 19
+      HUGE = 1 << 19
 
       # the default options used for parsing XML documents
-      DEFAULT_XML  = RECOVER | NONET
+      DEFAULT_XML = RECOVER | NONET
       # the default options used for parsing HTML documents
       DEFAULT_HTML = RECOVER | NOERROR | NOWARNING | NONET
 
@@ -80,6 +80,7 @@ module Nokogiri
 
       constants.each do |constant|
         next if constant.to_sym == :STRICT
+
         class_eval %{
           def #{constant.downcase}
             @options |= #{constant}

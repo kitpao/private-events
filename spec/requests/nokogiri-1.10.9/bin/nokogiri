@@ -32,7 +32,7 @@ module Nokogiri::CLI
     attr_accessor :rcfile
   end
 
-  self.rcfile  = File.expand_path('~/.nokogirirc')
+  self.rcfile = File.expand_path('~/.nokogirirc')
   self.console = :IRB
 end
 
@@ -48,7 +48,7 @@ opts = OptionParser.new do |opts|
   opts.separator "Options:"
 
   opts.on("--type type", "Parse as type: xml or html (default: auto)", [:xml, :html]) do |v|
-    parse_class = {:xml => Nokogiri::XML, :html => Nokogiri::HTML}[v]
+    parse_class = { :xml => Nokogiri::XML, :html => Nokogiri::HTML }[v]
   end
 
   opts.on("-C file", "Specifies initialization file to load (default #{Nokogiri::CLI.rcfile})") do |v|
@@ -64,7 +64,7 @@ opts = OptionParser.new do |opts|
   end
 
   opts.on("--rng <uri|path>", "Validate using this rng file.") do |v|
-    @rng = open(v) {|f| Nokogiri::XML::RelaxNG(f)}
+    @rng = open(v) { |f| Nokogiri::XML::RelaxNG(f) }
   end
 
   opts.on_tail("-?", "--help", "Show this message") do
@@ -115,4 +115,3 @@ else
     Nokogiri::CLI.console.start
   end
 end
-

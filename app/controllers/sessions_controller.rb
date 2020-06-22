@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def new
   end
 
@@ -9,7 +8,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       flash[:success] = "You have logged in!"
       redirect_to user_path(user)
-      #link_to dashboard
+      # link_to dashboard
     else
       flash[:notice] = "Account doesn't exist, please sign up"
       redirect_to sign_up_path

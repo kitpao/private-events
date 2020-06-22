@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 # Modify the PATH on windows so that the external DLLs will get loaded.
 
 require 'rbconfig'
@@ -72,15 +73,15 @@ module Nokogiri
     # Parse an HTML or XML document.  +string+ contains the document.
     def parse string, url = nil, encoding = nil, options = nil
       if string.respond_to?(:read) ||
-          /^\s*<(?:!DOCTYPE\s+)?html[\s>]/i === string[0, 512]
+         /^\s*<(?:!DOCTYPE\s+)?html[\s>]/i === string[0, 512]
         # Expect an HTML indicator to appear within the first 512
         # characters of a document. (<?xml ?> + <?xml-stylesheet ?>
         # shouldn't be that long)
         Nokogiri.HTML(string, url, encoding,
-          options || XML::ParseOptions::DEFAULT_HTML)
+                      options || XML::ParseOptions::DEFAULT_HTML)
       else
         Nokogiri.XML(string, url, encoding,
-          options || XML::ParseOptions::DEFAULT_XML)
+                     options || XML::ParseOptions::DEFAULT_XML)
       end.tap { |doc|
         yield doc if block_given?
       }

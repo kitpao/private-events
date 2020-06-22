@@ -14,21 +14,18 @@ RSpec.describe Invitation, type: :model do
     end
 
     context 'Create Invitation' do
-      #@invitation = Invitation.new(invitation_params)
-      #@invitation.host = current_user
-      #@invitation.event_id = session[:current_event]
       let(:host) { create(:user) }
-      let(:event) { create(:event, host: host)}
-      let(:invited) { create(:user)}
+      let(:event) { create(:event, host: host) }
+      let(:invited) { create(:user) }
       let(:invitation_test) { Invitation.new(host: host, event: event, invited: invited) }
 
-        it 'should save invitation' do
-          expect(invitation_test.save).to eq(true)
-        end
-        it 'should not save invitation' do
-          invitation_test.host = nil
-          expect(invitation_test.save).to eq(false)
-        end
+      it 'should save invitation' do
+        expect(invitation_test.save).to eq(true)
+      end
+      it 'should not save invitation' do
+        invitation_test.host = nil
+        expect(invitation_test.save).to eq(false)
+      end
     end
   end
 end

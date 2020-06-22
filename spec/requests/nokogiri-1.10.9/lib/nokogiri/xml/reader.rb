@@ -78,8 +78,8 @@ module Nokogiri
       alias :self_closing? :empty_element?
 
       def initialize source, url = nil, encoding = nil # :nodoc:
-        @source   = source
-        @errors   = []
+        @source = source
+        @errors = []
         @encoding = encoding
       end
       private :initialize

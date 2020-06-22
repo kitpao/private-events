@@ -5,10 +5,10 @@ RSpec.describe User, type: :model do
     it "should validates field" do
       should validate_presence_of(:name)
       should validate_uniqueness_of(:name).case_insensitive
-      should validate_length_of(:name).
-        is_at_least(3).
-        is_at_most(50).
-        on(:create)
+      should validate_length_of(:name)
+        .is_at_least(3)
+        .is_at_most(50)
+        .on(:create)
     end
   end
 
@@ -23,13 +23,12 @@ RSpec.describe User, type: :model do
 
   describe 'Create User' do
     let(:user) { build(:user) }
-      it 'should save user' do
-        expect(user.save).to eq(true)
-      end
-      it 'should validate' do
-        user.name = nil
-        expect(user.save).to eq(false)
-      end
+    it 'should save user' do
+      expect(user.save).to eq(true)
+    end
+    it 'should validate' do
+      user.name = nil
+      expect(user.save).to eq(false)
+    end
   end
-
 end

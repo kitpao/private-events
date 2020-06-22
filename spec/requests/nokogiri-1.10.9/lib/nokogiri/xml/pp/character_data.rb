@@ -10,7 +10,7 @@ module Nokogiri
         end
 
         def inspect # :nodoc:
-          "#<#{self.class.name}:#{sprintf("0x%x",object_id)} #{text.inspect}>"
+          "#<#{self.class.name}:#{sprintf("0x%x", object_id)} #{text.inspect}>"
         end
       end
     end
