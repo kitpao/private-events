@@ -15,19 +15,6 @@ RSpec.describe Event, type: :model do
         should validate_presence_of(:location)
         should validate_presence_of(:date)
       end
-
-      #let(:host_created) { FactoryBot.create(:user) }
-      let(:event_created) { FactoryBot.create(:event)}
-      it 'scopes' do
-
-        10.times do |i|
-          events_created << event_created
-        end
-        @events = events_created.upcoming_events
-
-        expect(@events).to be_empty
-
-      end
    end
 
 end

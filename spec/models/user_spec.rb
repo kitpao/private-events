@@ -26,5 +26,10 @@ RSpec.describe User, type: :model do
       it 'should save user' do
         expect(user.save).to eq(true)
       end
+      it 'should validate' do
+        user.name = nil
+        expect(user.save).to eq(false)
+      end
   end
+
 end
