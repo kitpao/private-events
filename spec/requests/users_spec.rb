@@ -13,10 +13,12 @@ RSpec.describe "Show user endpoint", type: :request do
     end
   end
   describe "POST /users" do
-    subject { post '/users', :params => { :user => {:name => 'foo' }}}
+    let(:created_params) { { :user => {:name => 'foo1' } }}
+
+    subject { post '/users', params: created_params }
 
     it "redirects to user_path(user)" do
-      expect(subject).to redirect_to("/users/1")
+      expect(subject).to redirect_to("/users/2")
     end
   end
 end
