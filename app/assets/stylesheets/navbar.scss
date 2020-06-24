@@ -1,5 +1,5 @@
 header {
-  background-color:hsl(0, 0%, 21%);
+  background-color: hsl(0, 0%, 21%);
   color: white;
 
   .nav {
@@ -7,11 +7,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
     .interactions {
       display: flex;
+    
       .welcome {
         padding-left: 1rem;
         display: flex;
+    
         a {
           padding: 0;
           color: white;
@@ -19,8 +22,10 @@ header {
           font-size: 0.8rem;
         }
       }
+    
       ul {
         display: flex;
+    
         a {
           margin-right: 0.3rem;
         }
@@ -36,6 +41,7 @@ header {
     .sign {
       li {
         margin: 1.4rem 0;
+    
         a {
           width: 10rem;
           transition: 600ms;
@@ -48,10 +54,10 @@ header {
       }
     }
 
-   li a {
+    li a {
       color: white;
       background-color: hsl(171, 100%, 41%);
-      padding:.5rem;
+      padding: 0.5rem;
       border-radius: 15px;
       font-weight: bold;
       display: block;
@@ -65,21 +71,22 @@ header {
   .container-nav {
     background-color:hsl(0, 0%, 21%);
     position: absolute;
-    right:0;
-    top:50px;
+    right: 0;
+    top: 50px;
     width: 200px;
     overflow: hidden;
-    transition: .2s;
+    transition: 0.2s;
     transition-property: width;
   }
 
   .container-nav.close {
-    width: 0px;
+    width: 0;
   }
+
   #btn-menu {
     background-color: transparent;
     border: 0;
-    color:white;
-    padding-right:1rem;
+    color: white;
+    padding-right: 1rem;
   }
 }
