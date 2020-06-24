@@ -93,3 +93,25 @@
     border-radius: 15px;
     font-weight: bold;
   }
+
+  input[type=text] {
+    border: 0;
+    border-bottom: 1px solid  hsl(171, 100%, 41%);
+    padding: 0.5rem;
+    padding-bottom: 0;
+  }
+
+  input[type=submit] {
+    border-radius: 0.3rem;
+    font-weight: bold;
+    color: white;
+    border: 0;
+    width: 100%;
+    padding: 0.3rem;
+    background-color: hsl(171, 100%, 41%);
+    box-shadow: 2px 2px 2px hsl(171, 100%, 10%)
+  }
+
+  textarea {
+    width: 100%;
+  }

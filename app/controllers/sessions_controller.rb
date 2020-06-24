@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    user = User.find_by_name(params[:session][:name])
+    user = User.find_by_name(params[:session][:name].downcase)
     if user && !user.nil?
       session[:user_id] = user.id
       flash[:success] = 'You have logged in!'
