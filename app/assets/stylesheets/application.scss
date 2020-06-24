@@ -112,6 +112,16 @@
     box-shadow: 2px 2px 2px hsl(171, 100%, 10%)
   }
 
+  input[type=date] {
+    border: 0;
+    border-bottom: 1px solid  hsl(171, 100%, 41%);
+    width: 100%;
+    text-align: center;
+  }
+
   textarea {
     width: 100%;
+    min-height: 100px;
+    border: 0;
+    border-bottom: 1px solid  hsl(171, 100%, 41%);
   }
