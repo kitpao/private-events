@@ -1,0 +1,43 @@
+<h1 class= "title"> <%= @user.name %>'s profile page! </h1>
+
+<h2 class= "subtitle"> My created events: (<%= @upcoming_created.count + @prev_created.count %>) </h2>
+
+<ul>
+  <p><strong>Upcoming events </strong>(<%= @upcoming_created.count %>)</p>
+  <% @upcoming_created.each do |event| %>
+    <li><%= link_to event.description, event_path(event) %></li>
+  <% end %>
+  <p><strong>Previous events </strong>(<%= @prev_created.count %>)</p>
+  <% @prev_created.each do |event| %>
+    <li><%= link_to event.description, event_path(event) %></li>
+  <% end %>
+
+</ul>
+
+
+<h2 class= "subtitle"> My attended events: (<%= @upcoming_events.count + @prev_events.count %>) </h2>
+
+<ul>
+  <p><strong>Upcoming events </strong>(<%= @upcoming_events.count %>)</p>
+  <% @upcoming_events.each do |event| %>
+    <li><%= link_to event.description, event_path(event) %></li>
+  <% end %>
+  <p><strong>Previous events </strong>(<%= @prev_events.count %>)</p>
+  <% @prev_events.each do |event| %>
+    <li><%= link_to event.description, event_path(event) %></li>
+  <% end %>
+
+</ul>
+
+<h2 class="subtitle"> Next Events | Invitations </h2>
+<ul>
+  <% @user.created_events.upcoming_events.each do |event| %>
+
+    <li>
+      <b><%=link_to event.description.capitalize, event_path(event) %></b>
+    </li>
+    <% event.invitations.each do |invitation| %>
+      <li><%= invitation.invited.name %></li>
+    <% end %>
+  <% end %>
+</ul>

@@ -1,0 +1,33 @@
+
+<div class="container">
+<h1 class="title">Events</h1>
+<!--More popular events based on invitations-->
+  <h4 class="subtitle">Upcoming Events (<%= @upcoming_events.count %>)</h4>
+  <div class="grids">
+  <% @upcoming_events.each do |event| %>
+    <div class="event_container">
+      <%= image_tag("https://source.unsplash.com/featured/?{event},{#{ event.id }}", class: 'image_for_events') %>
+      <ul class="list_container">
+        <li><%= link_to event.description, event_path(event) %></li>
+        <li><%= event.host.name %></li>
+        <li><%= event.date %></li>
+      </ul>
+    </div>
+  <% end %>
+  </div>
+
+  <h4 class="subtitle">Past Events (<%= @previous_events.count %>)</h4>
+  <div class="grids">
+  <% @previous_events.each do |event| %>
+    <div class="event_container">
+      <%= image_tag("https://source.unsplash.com/featured/?{event},{#{ event.id }}", class: 'image_for_events') %>
+      <ul class="list_container">
+        <li><%= link_to event.description, event_path(event) %></li>
+        <li><%= event.host.name %></li>
+        <li><%= event.date %></li>
+      </ul>
+    </div>
+  <% end %>
+  </div>
+
+</div>

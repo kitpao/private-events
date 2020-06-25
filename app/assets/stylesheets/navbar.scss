@@ -1,0 +1,92 @@
+header {
+  background-color: hsl(0, 0%, 21%);
+  color: white;
+
+  .nav {
+    min-height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    li a {
+      color: white;
+      background-color: hsl(171, 100%, 41%);
+      padding: 0.5rem;
+      border-radius: 15px;
+      font-weight: bold;
+      display: block;
+    }
+
+    .welcome {
+      padding-left: 1rem;
+      display: flex;
+
+      a {
+        padding: 0;
+        color: white;
+        text-decoration: underline;
+        font-size: 0.8rem;
+      }
+    }
+
+    li a:hover {
+      background-color: hsl(171, 100%, 21%);
+    }
+
+    .interactions {
+      display: flex;
+
+      ul {
+        display: flex;
+
+        a {
+          margin-right: 0.3rem;
+        }
+      }
+    }
+
+    .hide {
+      @media screen and(max-width: 768px) {
+        visibility: hidden;
+      }
+    }
+
+    .sign {
+      li {
+        margin: 1.4rem 0;
+
+        a {
+          width: 10rem;
+          transition: 600ms;
+        }
+
+        &:hover {
+          transform: scale(1.1);
+          transition: 600ms;
+        }
+      }
+    }
+  }
+
+  .container-nav {
+    background-color: hsl(0, 0%, 21%);
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 200px;
+    overflow: hidden;
+    transition: 0.2s;
+    transition-property: width;
+  }
+
+  .container-nav.close {
+    width: 0;
+  }
+
+  #btn-menu {
+    background-color: transparent;
+    border: 0;
+    color: white;
+    padding-right: 1rem;
+  }
+}

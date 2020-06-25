@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/health', to: 'health#health'
+  resources :users, except: %i[index update edit new]
+  resources :sessions, only: %i[create destroy]
+  resources :events , except: %i[update edit destroy]
+  resources :invitations, only: %i[new create]
+  get '/sign_in', to: 'sessions#new'
+  get '/sign_up', to: 'users#new'
+
+  root 'events#index'
 end

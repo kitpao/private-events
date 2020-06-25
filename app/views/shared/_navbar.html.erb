@@ -1,0 +1,34 @@
+<header>
+  <nav class='nav'>
+    <div class="interactions">
+      <div class= 'welcome'>
+      <%= link_to root_path do %>
+        <h3><%= "Welcome to our page #{current_user.name if sign_in?}!" %></h3>
+      <% end %>
+      </div>
+      <% if sign_in? %>
+      <ul class="hide">
+        <li><%= link_to 'My events', user_path(current_user) %></li>
+        <li><%= link_to 'New event', new_event_path %></li>
+      </ul>
+      <% end %>
+    </div>
+     <button id="btn-menu">
+       <span class="material-icons">menu</span>
+     </button>
+     <div class="container-nav">
+    <ul class= "sign">
+     <% if !sign_in? %>
+      <li><%= link_to 'Log in', sign_in_path  %></li>
+      <li><%= link_to 'Sign up', sign_up_path %></li>
+     <% else %>
+      <li><%= link_to 'Log out', session_path(session), method: :delete %></li>
+     <% end %>
+     <% if sign_in? %>
+        <li><%= link_to 'My events', user_path(current_user) %></li>
+        <li><%= link_to 'New event', new_event_path %></li>
+      <% end %>
+    </ul>
+    <div>
+  </nav>
+</header>

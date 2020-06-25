@@ -1,0 +1,12 @@
+<h3 class= "title"> Details for: <%= @event.description %></h3>
+<% if sign_in? && current_user == @event.host%>
+  <%= link_to "Invite your friends!", new_invitation_path, class: "button"%>
+<% end %>
+<div class= "image_for_events"></div>
+<h4 class= "subtitle"> Organizer for this event: <%= link_to @event.host.name, user_path(@event.host) %></h4>
+<h4 class= "subtitle"> Invited people:</h4>
+<ul>
+  <% @event.inviteds.each do |invited| %>
+    <li><%= link_to invited.name, user_path(invited) %></li>
+  <% end  %>
+</ul>
